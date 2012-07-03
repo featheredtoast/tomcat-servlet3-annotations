@@ -14,7 +14,7 @@
 
 	<appender name="ROLL" class="org.apache.log4j.rolling.RollingFileAppender">
 		<!-- The active file to log to -->
-		<param name="File" value="testlog.log" />
+		<param name="File" value="/var/log/logtest/testlog.log" />
 		<param name="Append" value="true" />
 		<param name="encoding" value="UTF-8" />
 		
@@ -23,7 +23,7 @@
 		        ends in .gz, it gzips it, based on the date stamp it rolls at that time, 
 		        default is yyyy-MM-dd, (rolls at midnight)
 		        See: http://logging.apache.org/log4j/companions/extras/apidocs/org/apache/log4j/rolling/TimeBasedRollingPolicy.html -->
-		        <param name="FileNamePattern" value="testlog.%d{yyyy-MM-dd-HH-mm}.log.gz" />
+		        <param name="FileNamePattern" value="/var/log/logtest/testlog.%d{yyyy-MM-dd-HH-mm}.log.gz" />
 		</rollingPolicy>
 		
 		<layout class="org.apache.log4j.PatternLayout">
