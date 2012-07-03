@@ -2,8 +2,10 @@ package com.test;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
+import javax.servlet.annotation.WebListener;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 
@@ -44,42 +46,23 @@ class TestThread implements Runnable {
 /**
  * Servlet implementation class Init
  */
-@WebServlet(name="Init",
-		urlPatterns={"/url"},
-initParams = {
-@WebInitParam(name= "log4jFile", value="WEB-INF/properties/log4j.properties")},
-loadOnStartup=1)
-public class Init extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+@WebListener()
+public class Init implements javax.servlet.ServletContextListener {
        
 	private TestThread thread;
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Init() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-    
-    /**
-	 * @see Servlet#init(ServletConfig)
-	 */
-    @Override
-	public void init(ServletConfig config) throws ServletException {
-    	super.init(config);
-		String prefix =  getServletContext().getRealPath("/");
-		String file = getInitParameter("log4jFile");
+
+	@Override
+	public void contextDestroyed(ServletContextEvent arg0) {
+        thread.stop();
+	}
+
+	@Override
+	public void contextInitialized(ServletContextEvent arg0) {
+		String prefix = arg0.getServletContext().getRealPath("/");
+		String file = "WEB-INF/properties/log4j.properties";
         PropertyConfigurator.configure(prefix+file);
         this.thread = new TestThread();
         new Thread(this.thread).start();
-	}
-
-	/**
-	 * @see Servlet#destroy()
-	 */
-	public void destroy() {
-		// TODO Auto-generated method stub
-		thread.stop();
 	}
 
 }
