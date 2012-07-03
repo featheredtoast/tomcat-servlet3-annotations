@@ -4,7 +4,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.annotation.WebListener;
 
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
+import org.apache.log4j.xml.DOMConfigurator;
 
 class TestThread implements Runnable {
 
@@ -50,8 +50,8 @@ public class Init implements javax.servlet.ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent arg0) {
 		String prefix = arg0.getServletContext().getRealPath("/");
-		String file = "WEB-INF/properties/log4j.properties";
-        PropertyConfigurator.configure(prefix+file);
+		String file = "WEB-INF/properties/log4j.xml";
+		DOMConfigurator.configure(prefix+file);
         this.thread = new TestThread();
         new Thread(this.thread).start();
 	}
