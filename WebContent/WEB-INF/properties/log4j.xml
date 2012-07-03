@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
 
-<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="true">
   <appender name="fileLog" class="org.apache.log4j.DailyRollingFileAppender">
-    <param name="file" value="testlog.log" />
-    <param name="encoding" value="UTF-8" />
+    <param name="File" value="testlog.log" />
     <param name="DatePattern" value="'.'yyyy-MM-dd" />
-    <param name="append" value="true" />
+    <param name="Append" value="true" />
+    <param name="Threshold" value="DEBUG"/>
     <layout class="org.apache.log4j.PatternLayout">
       <param name="ConversionPattern" value="%d{ISO8601} [%t] %-5p %c{2} - %m%n"/>
     </layout>
  </appender>
 
   <root> 
-    <priority value ="debug" /> 
     <appender-ref ref="fileLog" /> 
   </root>
   
