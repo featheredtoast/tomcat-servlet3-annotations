@@ -1,13 +1,7 @@
 package com.test;
 
-import javax.servlet.Servlet;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebListener;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
@@ -43,9 +37,6 @@ class TestThread implements Runnable {
 	}
 }
 
-/**
- * Servlet implementation class Init
- */
 @WebListener()
 public class Init implements javax.servlet.ServletContextListener {
        
